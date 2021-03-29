@@ -33,7 +33,7 @@ spring:
         max-idle: 5 #连接池中最大空闲连接
         min-idle: 10 #连接池中最小空闲连接
     database: 0
-    defaultRedisCacheExpires: 800
+    defaultRedisCacheExpires: 900
 
 server:
   port: 9388
