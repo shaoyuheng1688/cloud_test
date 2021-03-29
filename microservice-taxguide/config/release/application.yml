@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: taxguide-server
+  mvc:
+    pathmatch:
+      use-suffix-pattern: true
+  activemq:
+    broker-url: ${activemq.server.ip}
+    user: ${activemq.server.user}
+    password: ${activemq.server.password}
+    topic-name: POC.TAXGUIDE
+    send-timeout: 5s
+    pool:
+      enabled: true
+      max-connections: 10
+  jms:
+    pub-sub-domain: true
+  main:
+    allow-bean-definition-overriding: true
+  pool:
+    enabled: true
+    max-connections: 1000
+    idle-timeout: 30000
+  redis: #redis配置
+    host: ${redis.host}
+    port: ${redis.port} #Redis服务器连接端口
+    password: ${redis.password} #Redis服务器连接密码（默认为空）
+    timeout: 30000 #连接超时时间（毫秒）
+    lettuce:
+      pool:
+        max-active: 1000 #连接池最大连接数
+        max-wait: 3000 #连接池最大阻塞时间
+        max-idle: 5 #连接池中最大空闲连接
+        min-idle: 10 #连接池中最小空闲连接
+    database: ${taxguide.redis.database}
+    defaultRedisCacheExpires: 600
+  zipkin:
+    enabled: true
+    base-url: ${zipkin.enabled.base-url}
+  sleuth:
+    sampler:
+      probability: 0.1
+
+server:
+  port: ${taxguide.server.port}
+  servlet:
+    context-path: /poctaxguide
+    session:
+      timeout: 30m
+  max-http-header-size: 1024000
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}${taxguide.server.ip}:${taxguide.server.port}
+    prefer-ip-address: true
+  client:
+#    fetch-registry: false
+#    register-with-eureka: false
+    serviceUrl:
+      defaultZone: ${eureka.default.zone}
+
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+
+limit:
+  maxWaitCount: 10
+  workTime:
+    - 8:30:00~12:00:00
+    - 12:30:00~17:30:00
+
+seata:
+  enabled: false
+  enable-auto-data-source-proxy: false

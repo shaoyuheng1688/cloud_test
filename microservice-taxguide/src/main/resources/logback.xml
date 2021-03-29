@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+<!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+  <contextName>authentication</contextName>
+  <property name="FILE_DIRECTORY" value="D:/logs/microservice-taxguide" />
+  <property name="FILE_NAME" value="microservice-taxguide" />
+  <property name="CONSOLE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} %green([%thread]) %highlight(%-5level) %cyan(%logger{36}) - %msg%n"/>
+  <property name="PRINT_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${CONSOLE_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="INFOFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+    </filter>
+    <encoder>
+      <pattern>${PRINT_PATTERN}</pattern>
+      <charset>utf-8</charset>
+    </encoder>
+    <file>${FILE_DIRECTORY}/${FILE_NAME}-info.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <fileNamePattern>${FILE_DIRECTORY}/${FILE_NAME}-info.log.%d{yyyy-MM-dd}-%i</fileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${FILE_DIRECTORY}/${FILE_NAME}-info.log.%d{yyyy-MM-dd}</fileNamePattern>
+      <maxHistory>30</maxHistory>
+    </triggeringPolicy>
+  </appender>
+  <appender name="ERRORFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+    <encoder>
+      <pattern>${PRINT_PATTERN}</pattern>
+      <charset>utf-8</charset>
+    </encoder>
+    <file>${FILE_DIRECTORY}/${FILE_NAME}-error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <fileNamePattern>${FILE_DIRECTORY}/${FILE_NAME}-error.log.%d{yyyy-MM-dd}-%i</fileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${FILE_DIRECTORY}/${FILE_NAME}-error.log.%d{yyyy-MM-dd}</fileNamePattern>
+      <maxHistory>30</maxHistory>
+    </triggeringPolicy>
+  </appender>
+
+  <logger name="com.raymon.taxguide.remote" level="DEBUG"/>
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="INFOFILE" />
+    <appender-ref ref="ERRORFILE" />
+  </root>
+</configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE guzz-configs PUBLIC "-//GUZZ//DTD MAIN CONFIG//EN" "guzz.dtd">
+
+<guzz-configs>
+
+    <dialect class="org.guzz.dialect.Oracle10gDialect"/>
+    <!--<dialect class="org.guzz.dialect.Mysql5Dialect" />-->
+
+    <tran locator="spring">
+        <dbgroup name="default" masterDBConfigName="masterDB"/>
+    </tran>
+
+    <config-server>
+        <server class="org.guzz.config.LocalFileConfigServer">
+            <!--guzz支持springboot使用内置的服务启动-->
+            <!--<param name="resource" value="fms.properties" />-->
+            <param name="resource" value="classpath:guzz/fms.properties"/>
+        </server>
+    </config-server>
+
+    <!--guzz支持springboot使用内置的服务启动-->
+    <!--<import resource="sqlservice.xml"/>-->
+    <import resource="classpath:guzz/sqlservice.xml"/>
+
+    <business-scan resources="classpath*:/com/raymon/taxguide/model/*.class" dbgroup="default"/>
+    <business-scan resources="classpath*:/com/raymon/taxguide/pojo/*.class" dbgroup="default"/>
+    <business-scan resources="classpath*:/com/raymon/taxguide/pojo/*/*.class" dbgroup="default"/>
+</guzz-configs>

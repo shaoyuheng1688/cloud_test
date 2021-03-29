@@ -1,0 +1,17 @@
+server:
+  port: 8076
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    hostName: localhost
+  client:
+    register-with-eureka: false #  默认为 true。设为 false，仅作为服务中心，不作为服务客户端。
+    fetch-registry: false # 默认为true。设为false，不从服务中心检索注册的服务。
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostName}:${server.port}/eureka
+    server:
+      eviction-interval-timer-in-ms: 5000 #清理间隔（单位毫秒，默认是60*1000）
+      enable-self-preservation: true # 默认为true。设为false，关闭自我保护。

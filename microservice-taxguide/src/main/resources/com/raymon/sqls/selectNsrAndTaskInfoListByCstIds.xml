@@ -1,0 +1,31 @@
+<sqlMap dbgroup="masterDB">
+    <select id="selectNsrAndTaskInfoListByCstIds" orm="nsrandtaskinfo" templated="true">
+		SELECT
+			A.TG_ID tgId,
+			B.CS_TICKET_ID cstId,
+			A.IDENTITY_NUMBER identityNumber,
+			C.USER_NAME userName,
+			C.TAXPAYER_NUMBER nsrsbh,
+			C.NSRMC nsrmc,
+			C.THEME_CODE ztbm,
+			D.ZTMC ztmc,
+			A.CREATE_TIME createTime
+		FROM T_TAXGUIDE_RECORD A
+		LEFT JOIN T_TAXGUIDE_RECORD_INFO B ON A.CURRENT_TG_INFO_ID = B.TG_INFO_ID
+		LEFT JOIN T_EFORM_RECORD C ON A.BUSSID = C.RECORD_ID
+		LEFT JOIN T_THEME D ON C.THEME_CODE = D.ZTBM
+		WHERE B.CS_TICKET_ID IN (
+			#foreach($cstId in $cstIds)
+				#if($foreach.index > 0)
+				,
+				#end
+				'$cstId'
+			#end
+		)
+        <paramsMapping>
+        </paramsMapping>
+    </select>
+</sqlMap>
+
+
+

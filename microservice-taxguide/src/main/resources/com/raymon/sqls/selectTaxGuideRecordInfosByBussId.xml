@@ -1,0 +1,26 @@
+<sqlMap dbgroup="masterDB">
+    <select id="selectTaxGuideRecordInfosByBussId" orm="taxguideRecordInfo" templated="true">
+		SELECT
+			B.TG_INFO_ID,
+		    B.STATE,
+		    B.CREATE_TIME,
+		    B.CALL_TIME,
+		    B.START_TIME,
+		    (CASE WHEN B.STATE = 5 THEN A.END_TIME ELSE B.FINISH_TIME END ) FINISH_TIME,
+		    B.REMARK,
+            ACC.ACC_CODE accCode,
+		    ACC.EMP_NUMBER empNumber
+		FROM
+		   T_TAXGUIDE_RECORD A
+		   LEFT JOIN T_TAXGUIDE_RECORD_INFO B ON A.TG_ID = B.TG_ID
+		   LEFT JOIN T_ACCOUNT ACC ON B.ACC_ID = ACC.ACC_ID
+        WHERE
+		   A.BUSSID = :bussId
+        <paramsMapping>
+			<map paramName="bussId" type="string"/>
+        </paramsMapping>
+    </select>
+</sqlMap>
+
+
+
