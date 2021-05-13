@@ -1,7 +1,8 @@
 package com.raymon.taxguide.util;
 
-import com.raymon.frame.vo.GsonObjResult;
-import com.raymon.frame.web.exception.ApplicationException;
+
+import com.raymon.taxguide.vo.GsonObjResult;
+import com.raymon.taxguide.web.exception.ApplicationException;
 
 public class ResultUtil {
 

@@ -1,10 +1,6 @@
 package com.raymon.taxguide.remote.imp;
 
-import com.raymon.frame.vo.CSTicketVo;
-import com.raymon.frame.vo.EformRecordVo;
-import com.raymon.frame.vo.GsonObjResult;
-import com.raymon.frame.vo.PageResultVO;
-import com.raymon.frame.web.exception.ApplicationException;
+import com.raymon.taxguide.vo.*;
 import com.raymon.taxguide.remote.CsFeignClient;
 import com.raymon.taxguide.pojo.cs.CsServerParams;
 import org.springframework.stereotype.Component;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.raymon.taxguide.mapper.LogTaxmanInfoMapper">
+    <select id="getNsrAndTaskInfoListByCstIds" parameterType="java.util.List" resultType="nsrAndTaskInfo">
+		SELECT
+			A.TG_ID tgId,
+			B.CS_TICKET_ID cstId,
+			A.IDENTITY_NUMBER identityNumber,
+			C.USER_NAME userName,
+			C.TAXPAYER_NUMBER nsrsbh,
+			C.NSRMC nsrmc,
+			C.THEME_CODE ztbm,
+			D.ZTMC ztmc,
+			A.CREATE_TIME createTime
+		FROM T_TAXGUIDE_RECORD A
+				 LEFT JOIN T_TAXGUIDE_RECORD_INFO B ON A.CURRENT_TG_INFO_ID = B.TG_INFO_ID
+				 LEFT JOIN T_EFORM_RECORD C ON A.BUSSID = C.RECORD_ID
+				 LEFT JOIN T_THEME D ON C.THEME_CODE = D.ZTBM
+		<foreach collection="cstIds" item="cstId" index="index" open="WHERE B.CS_TICKET_ID IN (" separator="," close=")">
+			#{cstId}
+		</foreach>
+    </select>
+</mapper>

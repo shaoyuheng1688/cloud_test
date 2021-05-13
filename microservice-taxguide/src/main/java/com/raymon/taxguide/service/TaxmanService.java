@@ -1,6 +1,5 @@
 package com.raymon.taxguide.service;
 
-import com.raymon.frame.vo.PageResultVO;
 import com.raymon.taxguide.model.LogTaxmanInfo;
 import com.raymon.taxguide.action.ActionEvent;
 import com.raymon.taxguide.pojo.NsrAndTaskInfo;
@@ -10,11 +9,11 @@ import java.util.List;
 
 public interface TaxmanService {
 
-    void action(LogTaxmanInfo taxmanInfo, ActionEvent event);
-
-    TaxguideClientInfo taxguideClientInfoExtract(LogTaxmanInfo lti);
-
-    LogTaxmanInfo getUserLogTaxmanInfo(String accId);
-
-    PageResultVO<NsrAndTaskInfo> getCanDealTickets(String accId, int pageNo, int pageSize);
+//    void action(LogTaxmanInfo taxmanInfo, ActionEvent event);
+//
+//    TaxguideClientInfo taxguideClientInfoExtract(LogTaxmanInfo lti);
+//
+//    LogTaxmanInfo getUserLogTaxmanInfo(String accId);
+//
+//    PageResultVO<NsrAndTaskInfo> getCanDealTickets(String accId, int pageNo, int pageSize);
 }

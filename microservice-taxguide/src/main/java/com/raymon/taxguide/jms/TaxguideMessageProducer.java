@@ -10,21 +10,21 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.jms.Topic;
 
-@Component
+//@Component
 @Slf4j
 public class TaxguideMessageProducer {
 
-    @Autowired
-    private JmsMessagingTemplate jmsMessagingTemplate;
-
-    @Resource
-    private Topic topic;
-
-    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-
-    public void sendTopic(Object msg) {
-        String message = gson.toJson(msg);
-        log.info("发送Topic消息内容 :"+ message);
-        this.jmsMessagingTemplate.convertAndSend(this.topic, message);
-    }
+//    @Autowired
+//    private JmsMessagingTemplate jmsMessagingTemplate;
+//
+//    @Resource
+//    private Topic topic;
+//
+//    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//
+//    public void sendTopic(Object msg) {
+//        String message = gson.toJson(msg);
+//        log.info("发送Topic消息内容 :"+ message);
+//        this.jmsMessagingTemplate.convertAndSend(this.topic, message);
+//    }
 }

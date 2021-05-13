@@ -1,17 +1,6 @@
 package com.raymon.taxguide.service.imp;
-
-
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.raymon.frame.lock.ResourceLock;
-import com.raymon.frame.lock.ResourceLockFactory;
-import com.raymon.frame.utils.DateTimeUtils;
-import com.raymon.frame.vo.CSTicketVo;
-import com.raymon.frame.vo.EformRecordVo;
-import com.raymon.frame.vo.GsonObjResult;
-import com.raymon.frame.vo.ManageUnitVo;
-import com.raymon.frame.web.exception.ApplicationException;
 import com.raymon.taxguide.event.PollTimeEvent;
+import com.raymon.taxguide.lock.ResourceLockFactory;
 import com.raymon.taxguide.model.*;
 import com.raymon.taxguide.remote.CsFeignClient;
 import com.raymon.taxguide.remote.EFormFeignClient;
@@ -21,18 +10,21 @@ import com.raymon.taxguide.repository.TaxguideRepository;
 import com.raymon.taxguide.repository.UserRepository;
 import com.raymon.taxguide.service.TaxpayerService;
 import com.raymon.taxguide.util.ResultUtil;
+import com.raymon.taxguide.utils.DateTimeUtils;
+import com.raymon.taxguide.vo.CSTicketVo;
+import com.raymon.taxguide.vo.EformRecordVo;
+import com.raymon.taxguide.vo.GsonObjResult;
+import com.raymon.taxguide.web.exception.ApplicationException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j

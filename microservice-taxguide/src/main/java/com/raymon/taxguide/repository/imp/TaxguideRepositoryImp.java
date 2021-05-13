@@ -1,12 +1,14 @@
 package com.raymon.taxguide.repository.imp;
 
-import com.raymon.taxguide.dao.LogTaxguidePollTimeDao;
-import com.raymon.taxguide.dao.TaxguideRecordDao;
-import com.raymon.taxguide.dao.TaxguideRecordInfoDao;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.raymon.taxguide.mapper.LogTaxguidePollTimeMapper;
+import com.raymon.taxguide.mapper.TaxguideRecordInfoMapper;
+import com.raymon.taxguide.mapper.TaxguideRecordMapper;
 import com.raymon.taxguide.model.LogTaxguidePollTime;
 import com.raymon.taxguide.model.TaxguideRecord;
 import com.raymon.taxguide.model.TaxguideRecordInfo;
 import com.raymon.taxguide.repository.TaxguideRepository;
+import com.raymon.taxguide.web.exception.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,94 +21,147 @@ import java.util.List;
 public class TaxguideRepositoryImp implements TaxguideRepository {
 
 	@Autowired
-	private TaxguideRecordDao taxguideRecordDao;
+	private TaxguideRecordMapper taxguideRecordMapper;
 
 	@Autowired
-	private TaxguideRecordInfoDao taxguideRecordInfoDao;
+	private TaxguideRecordInfoMapper taxguideRecordInfoMapper;
 
 	@Autowired
-	private LogTaxguidePollTimeDao logTaxguidePollTimeDao;
+	private LogTaxguidePollTimeMapper logTaxguidePollTimeMapper;
 
 	@Override
 	@Cacheable(value = "tgRecord",key = "#id",unless = "#result == null")
 	public TaxguideRecord findTaxguideRecordById(String id) {
-		return taxguideRecordDao.findTaxguideRecordById(id);
+		return taxguideRecordMapper.selectById(id);
 	}
 
 	@Override
 	@CacheEvict(value="tgRecord",key="#taxguideRecord.tgId")
 	public TaxguideRecord updateTaxguideRecord(TaxguideRecord taxguideRecord) {
-		return taxguideRecordDao.updateTaxguideRecord(taxguideRecord);
+		int count = taxguideRecordMapper.updateById(taxguideRecord);
+		if(0 < count ){
+			return taxguideRecord;
+		}else{
+		throw new ApplicationException("更新失败！");
+		}
 	}
 
 	@Override
 	@CacheEvict(value="tgRecord",key="#taxguideRecord.tgId")
 	public TaxguideRecord saveTaxguideRecord(TaxguideRecord taxguideRecord) {
-		return taxguideRecordDao.saveTaxguideRecord(taxguideRecord);
+		int count = taxguideRecordMapper.insert(taxguideRecord);
+		if(0 < count ){
+			return taxguideRecord;
+		}else{
+			throw new ApplicationException("保存失败！");
+		}
 	}
 
 	@Override
 	@CacheEvict(value="tgRecord",key="#taxguideRecord.tgId")
 	public boolean deleteTaxguideRecord(TaxguideRecord taxguideRecord) {
-		return taxguideRecordDao.deleteTaxguideRecord(taxguideRecord);
+		int count = taxguideRecordMapper.deleteById(taxguideRecord);
+		if(0 < count ){
+			return true;
+		}else{
+			throw new ApplicationException("删除失败！");
+		}
 	}
 
 	@Override
 	@Cacheable(value = "tgRecordInfo",key = "#id",unless = "#result == null")
 	public TaxguideRecordInfo findTaxguideRecordInfoById(long id) {
-		return taxguideRecordInfoDao.findTaxguideRecordInfoById(id);
+		return taxguideRecordInfoMapper.selectById(id);
 	}
 
 	@Override
 	@CacheEvict(value="tgRecordInfo",key="#taxguideRecordInfo.tgInfoId")
 	public TaxguideRecordInfo updateTaxguideRecordInfo(TaxguideRecordInfo taxguideRecordInfo) {
-		return taxguideRecordInfoDao.updateTaxguideRecordInfo(taxguideRecordInfo);
+		int count = taxguideRecordInfoMapper.updateById(taxguideRecordInfo);
+		if(0 < count ){
+			return taxguideRecordInfo;
+		}else{
+			throw new ApplicationException("更新失败！");
+		}
 	}
 
 	@Override
 	@CacheEvict(value="tgRecordInfo",key="#taxguideRecordInfo.tgInfoId")
 	public TaxguideRecordInfo saveTaxguideRecordInfo(TaxguideRecordInfo taxguideRecordInfo) {
-		return taxguideRecordInfoDao.saveTaxguideRecordInfo(taxguideRecordInfo);
+		int count = taxguideRecordInfoMapper.insert(taxguideRecordInfo);
+		if(0 < count ){
+			return taxguideRecordInfo;
+		}else{
+			throw new ApplicationException("保存失败！");
+		}
 	}
 
 	@Override
 	@CacheEvict(value="tgRecordInfo",key="#taxguideRecordInfo.tgInfoId")
 	public boolean deleteTaxguideRecordInfo(TaxguideRecordInfo taxguideRecordInfo) {
-		return taxguideRecordInfoDao.deleteTaxguideRecordInfo(taxguideRecordInfo);
+		int count = taxguideRecordInfoMapper.deleteById(taxguideRecordInfo);
+		if(0 < count ){
+			return true;
+		}else{
+			throw new ApplicationException("删除失败！");
+		}
 	}
 
 	@Override
 	public LogTaxguidePollTime findLogTaxguidePollTimeById(Long id) {
-		return logTaxguidePollTimeDao.findLogTaxguidePollTimeById(id);
+		return logTaxguidePollTimeMapper.selectById(id);
 	}
 
 	@Override
 	public LogTaxguidePollTime updateLogTaxguidePollTime(LogTaxguidePollTime logTaxguidePollTime) {
-		return logTaxguidePollTimeDao.updateLogTaxguidePollTime(logTaxguidePollTime);
+		int count = logTaxguidePollTimeMapper.updateById(logTaxguidePollTime);
+		if(0 < count ){
+			return logTaxguidePollTime;
+		}else{
+			throw new ApplicationException("更新失败！");
+		}
 	}
 
 	@Override
 	public LogTaxguidePollTime saveLogTaxguidePollTime(LogTaxguidePollTime logTaxguidePollTime) {
-		return logTaxguidePollTimeDao.saveLogTaxguidePollTime(logTaxguidePollTime);
+		int count = logTaxguidePollTimeMapper.insert(logTaxguidePollTime);
+		if(0 < count ){
+			return logTaxguidePollTime;
+		}else{
+			throw new ApplicationException("保存失败！");
+		}
 	}
 
 	@Override
 	public boolean deleteLogTaxguidePollTime(LogTaxguidePollTime logTaxguidePollTime) {
-		return logTaxguidePollTimeDao.deleteLogTaxguidePollTime(logTaxguidePollTime);
+		int count = logTaxguidePollTimeMapper.deleteById(logTaxguidePollTime);
+		if(0 < count ){
+			return true;
+		}else{
+			throw new ApplicationException("删除失败！");
+		}
 	}
 
 	@Override
 	public LogTaxguidePollTime findLogTaxguidePollTimeByTgIdAndSource(String tgId, int source) {
-		return logTaxguidePollTimeDao.findLogTaxguidePollTimeByTgIdAndSource(tgId,source);
+		QueryWrapper<LogTaxguidePollTime> wrapper = new QueryWrapper<>();
+		wrapper.eq("TG_ID",tgId)
+				.eq("SOURCE", source)
+				.orderByDesc("CREATE_TIME");
+		return logTaxguidePollTimeMapper.selectOne(wrapper);
 	}
 
 	@Override
 	public List<TaxguideRecordInfo> getTaxGuideRecordInfosByBussId(String bussId) {
-		return taxguideRecordInfoDao.getTaxGuideRecordInfosByBussId(bussId);
+		return taxguideRecordInfoMapper.getTaxGuideRecordInfosByBussId(bussId);
 	}
 
 	@Override
 	public TaxguideRecord findNotFinishTaxguideRecordByBussId(String bussId) {
-		return taxguideRecordDao.findNotFinishTaxguideRecordByBussId(bussId);
+		QueryWrapper<TaxguideRecord> wrapper = new QueryWrapper<TaxguideRecord>();
+		wrapper.eq("BUSSID",bussId)
+				.lt("STATE", 4)
+				.orderByDesc("CREATE_TIME");
+		return taxguideRecordMapper.selectOne(wrapper);
 	}
 }

@@ -1,25 +1,19 @@
 package com.raymon.taxguide.action.imp;
 
-import com.raymon.frame.vo.CSTicketVo;
-import com.raymon.frame.vo.GsonObjResult;
-import com.raymon.frame.web.exception.ApplicationException;
 import com.raymon.taxguide.action.AbstractAction;
 import com.raymon.taxguide.action.ActionEvent;
 import com.raymon.taxguide.manager.TaxmanAgentActionManager;
 import com.raymon.taxguide.model.LogTaxmanInfo;
-import com.raymon.taxguide.model.TaxguideRecord;
-import com.raymon.taxguide.model.TaxguideRecordInfo;
 import com.raymon.taxguide.pojo.cs.CsServerParams;
 import com.raymon.taxguide.remote.CsFeignClient;
-import com.raymon.taxguide.repository.TaxguideRepository;
-import com.raymon.taxguide.repository.UserRepository;
 import com.raymon.taxguide.util.ResultUtil;
+import com.raymon.taxguide.vo.CSTicketVo;
+import com.raymon.taxguide.vo.GsonObjResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.Calendar;
 
 
 @Component

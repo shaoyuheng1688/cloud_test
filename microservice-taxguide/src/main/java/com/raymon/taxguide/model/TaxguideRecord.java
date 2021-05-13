@@ -1,22 +1,17 @@
 package com.raymon.taxguide.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.guzz.annotations.GenericGenerator;
-import org.guzz.annotations.Table;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel("导税主记录")
-@javax.persistence.Entity
-@org.guzz.annotations.Entity(businessName="taxguideRecord")
-@Table(name="T_TAXGUIDE_RECORD")
+@TableName("T_TAXGUIDE_RECORD")
 @Data
 public class TaxguideRecord implements Serializable {
 
@@ -64,54 +59,51 @@ public class TaxguideRecord implements Serializable {
     }
 
     @ApiModelProperty("主键")
-    @Id
-    @GeneratedValue(generator = "uuidGenerator")
-    @GenericGenerator(name = "uuidGenerator", strategy = "uuid")
-    @Column(name = "TG_ID", length = 32)
+    @TableId(value = "TG_ID" , type = IdType.ASSIGN_UUID)
     private String tgId;
 
     @ApiModelProperty("导税状态：0 等待叫号、1 叫号中、2 纳税人端就绪、3 导税中、4 导税完成、5 弃号")
-    @Column(name = "STATE")
+    @TableField(value = "STATE")
     private int state;
 
     @ApiModelProperty("创建时间")
-    @Column(name = "CREATE_TIME")
+    @TableField(value = "CREATE_TIME")
     private Date createTime;
 
     @ApiModelProperty("结束时间")
-    @Column(name = "END_TIME")
+    @TableField(value = "END_TIME")
     private Date endTime;
 
     @ApiModelProperty("当前的导税副表ID")
-    @Column(name = "CURRENT_TG_INFO_ID")
+    @TableField(value = "CURRENT_TG_INFO_ID")
     private long currentTgInfoId;
 
     @ApiModelProperty("业务ID，一般是填单记录ID")
-    @Column(name = "BUSSID")
+    @TableField(value = "BUSSID")
     private String bussId;
 
     @ApiModelProperty("税务机关代码")
-    @Column(name = "SWJG_DM")
+    @TableField(value = "SWJG_DM")
     private String swjgDm;
 
     @ApiModelProperty("主题编码")
-    @Column(name = "ZTBM")
+    @TableField(value = "ZTBM")
     private String ztbm;
 
     @ApiModelProperty("主题名称")
-    @Transient
+    @TableField(exist = false)
     private String ztmc;
 
     @ApiModelProperty("纳税人身份证号")
-    @Column(name = "IDENTITY_NUMBER")
+    @TableField(value = "IDENTITY_NUMBER")
     private String identityNumber;
 
     @ApiModelProperty("当前副表详情信息")
-    @Transient
+    @TableField(exist = false)
     private TaxguideRecordInfo currentTaxguideRecordInfo;
 
     @ApiModelProperty("等候人数")
-    @Transient
+    @TableField(exist = false)
     private int waitCount;
 
 

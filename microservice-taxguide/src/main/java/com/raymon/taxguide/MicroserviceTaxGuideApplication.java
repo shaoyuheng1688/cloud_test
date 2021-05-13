@@ -14,13 +14,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.raymon"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class})
+@EnableAutoConfiguration
 @EnableFeignClients
 @EnableHystrix
 @EnableSwagger2
 public class MicroserviceTaxGuideApplication {
-
     public static void main(String[] args) {
+        System.setProperty("javax.xml.parsers.DocumentBuilderFactory","com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
         SpringApplication.run(MicroserviceTaxGuideApplication.class, args);
     }
 

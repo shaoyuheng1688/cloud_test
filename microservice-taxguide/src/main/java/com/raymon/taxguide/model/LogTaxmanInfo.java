@@ -1,22 +1,16 @@
 package com.raymon.taxguide.model;
 
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.guzz.annotations.Parameter;
-import org.guzz.annotations.Table;
-
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel("导税员信息")
-@javax.persistence.Entity
-@org.guzz.annotations.Entity(businessName="taxmanInfo")
-@Table(name="T_LOG_TAXMAN_INFO")
+@TableName("T_LOG_TAXMAN_INFO")
 @Data
+@KeySequence(value = "S_TG_TI_ID")
 public class LogTaxmanInfo implements Serializable {
 
     private static final long serialVersionUID = -1583611829230809242L;
@@ -28,27 +22,22 @@ public class LogTaxmanInfo implements Serializable {
     }
 
     @ApiModelProperty("主键")
-    @javax.persistence.Id
-    @org.guzz.annotations.GenericGenerator(name = "SEQ_TG_TI_ID", parameters = {
-            @Parameter(name = "useAssignedCond", value = "#value>0"),
-            @Parameter(name = "sequence", value = "S_TG_TI_ID")}, strategy = "sequence")
-    @javax.persistence.GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_TG_TI_ID")
-    @Column(name = "TI_ID")
-    private long tiId;
+    @TableId(value = "TI_ID" , type = IdType.INPUT)
+    private Long tiId;
 
     @ApiModelProperty("导税员ID")
-    @Column(name = "ACC_ID")
+    @TableField(value = "ACC_ID")
     private String accId;
 
     @ApiModelProperty("税务人员当前动作：IDLE 空闲、CALLING 呼叫中、DEALING 办理中")
-    @Column(name = "ACTION")
+    @TableField(value = "ACTION")
     private String action;
 
     @ApiModelProperty("创建时间")
-    @Column(name = "CREATE_TIME")
+    @TableField(value = "CREATE_TIME")
     private Date createTime;
 
     @ApiModelProperty("当前办理的导税记录主键")
-    @Column(name = "CURRENT_TG_ID")
+    @TableField(value = "CURRENT_TG_ID")
     private String currentTgId;
 }

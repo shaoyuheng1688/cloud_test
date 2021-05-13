@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.jms.Topic;
 
 
-@Configuration
+//@Configuration
 public class ActiveMQConfig {
 
     @Value("${spring.activemq.topic-name}")

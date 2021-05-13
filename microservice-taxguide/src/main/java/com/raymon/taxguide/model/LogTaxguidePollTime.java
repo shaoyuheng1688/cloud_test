@@ -1,18 +1,13 @@
 package com.raymon.taxguide.model;
 
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
-import org.guzz.annotations.Parameter;
-import org.guzz.annotations.Table;
-
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.util.Date;
 
-@javax.persistence.Entity
-@org.guzz.annotations.Entity(businessName="logTaxguidePollTime")
-@Table(name="T_LOG_TAXGUIDE_POLL_TIME")
+@TableName("T_LOG_TAXGUIDE_POLL_TIME")
 @Data
+@KeySequence(value = "S_LOG_TAXGUIDE_PT_ID")
 public class LogTaxguidePollTime implements Serializable {
 
     private static final long serialVersionUID = 7777364359807983577L;
@@ -37,26 +32,21 @@ public class LogTaxguidePollTime implements Serializable {
         public static final int SWRY = 2;
     }
 
-    @javax.persistence.Id
-    @org.guzz.annotations.GenericGenerator(name = "SEQ_LOG_TAXGUIDE_PT_ID", parameters = {
-            @Parameter(name = "useAssignedCond", value = "#value>0"),
-            @Parameter(name = "sequence", value = "S_LOG_TAXGUIDE_PT_ID")}, strategy = "sequence")
-    @javax.persistence.GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_LOG_TAXGUIDE_PT_ID")
-    @Column(name = "PT_ID")
+    @TableId(value = "PT_ID" , type = IdType.INPUT)
     private long ptId;
 
-    @Column(name = "TG_ID")
+    @TableField(value = "TG_ID")
     private String tgId;
 
-    @Column(name = "SOURCE")
+    @TableField(value = "SOURCE")
     private int source;
 
-    @Column(name = "SOURCE_ID")
+    @TableField(value = "SOURCE_ID")
     private String sourceId;
 
-    @Column(name = "CREATE_TIME")
+    @TableField(value = "CREATE_TIME")
     private Date createTime;
 
-    @Column(name = "POLL_TIME")
+    @TableField(value = "POLL_TIME")
     private Date pollTime;
 }

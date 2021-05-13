@@ -1,9 +1,9 @@
 package com.raymon.taxguide.remote;
 
-import com.raymon.frame.vo.EformRecordVo;
-import com.raymon.frame.vo.GsonObjResult;
-import com.raymon.frame.vo.ManageUnitVo;
 import com.raymon.taxguide.remote.imp.EformFeignClientImp;
+import com.raymon.taxguide.vo.EformRecordVo;
+import com.raymon.taxguide.vo.GsonObjResult;
+import com.raymon.taxguide.vo.ManageUnitVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

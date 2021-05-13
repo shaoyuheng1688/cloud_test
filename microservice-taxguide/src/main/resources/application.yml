@@ -4,6 +4,8 @@ spring:
   mvc:
     pathmatch:
       use-suffix-pattern: true
+  profiles:
+    active: oracle
   activemq:
     broker-url: tcp://192.168.1.105:61616
     user: admin
@@ -34,6 +36,13 @@ spring:
         min-idle: 10 #连接池中最小空闲连接
     database: 0
     defaultRedisCacheExpires: 1000
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: /
+    username: guest
+    password: guest
+    publisher-returns: true
 
 server:
   port: 9388
@@ -68,6 +77,8 @@ limit:
     - 8:30:00~11:00:00
     - 14:00:00~16:00:00
 
-seata:
-  enabled: false
-  enable-auto-data-source-proxy: false
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/*.xml
+  type-aliases-package: com.raymon.taxguide.model,com.raymon.taxguide.pojo

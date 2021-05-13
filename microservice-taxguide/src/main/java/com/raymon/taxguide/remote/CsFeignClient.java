@@ -1,10 +1,10 @@
 package com.raymon.taxguide.remote;
 
-import com.raymon.frame.vo.CSTicketVo;
-import com.raymon.frame.vo.GsonObjResult;
-import com.raymon.frame.vo.PageResultVO;
 import com.raymon.taxguide.remote.imp.CsFeignClientImp;
 import com.raymon.taxguide.pojo.cs.CsServerParams;
+import com.raymon.taxguide.vo.CSTicketVo;
+import com.raymon.taxguide.vo.GsonObjResult;
+import com.raymon.taxguide.vo.PageResultVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;

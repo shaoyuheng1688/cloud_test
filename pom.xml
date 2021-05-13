@@ -147,11 +147,6 @@
                 <artifactId>axis2-transport-http</artifactId>
                 <version>1.6.2</version>
             </dependency>
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-spring-boot-starter</artifactId>
-                <version>7.1.0.M5</version>
-            </dependency>
             <!--ActiveMq-->
             <!--消息队列连接池-->
             <dependency>
@@ -281,5 +276,6 @@
         <module>microservice-eureka</module>
         <module>microservice-frame</module>
         <module>microservice-taxguide</module>
+        <module>springboot-rabbit-consumer</module>
     </modules>
 </project>

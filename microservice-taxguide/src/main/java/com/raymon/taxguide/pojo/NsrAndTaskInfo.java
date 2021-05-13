@@ -4,17 +4,16 @@ package com.raymon.taxguide.pojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
 
 @ApiModel("可办理的票号信息")
 @Data
-@javax.persistence.Entity
-@org.guzz.annotations.Entity(businessName="nsrandtaskinfo")
+@Alias("nsrAndTaskInfo")
 public class NsrAndTaskInfo {
 
     @ApiModelProperty("导税主记录ID")
-    @javax.persistence.Id
     private String tgId;
 
     @ApiModelProperty("CS票号ID")

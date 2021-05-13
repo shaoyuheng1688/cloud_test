@@ -52,7 +52,7 @@
   </appender>
 
   <logger name="com.raymon.taxguide.remote" level="DEBUG"/>
-
+  <logger name="com.baomidou.mybatisplus.generator" level="DEBUG"/>
   <root level="INFO">
     <appender-ref ref="CONSOLE" />
     <appender-ref ref="INFOFILE" />

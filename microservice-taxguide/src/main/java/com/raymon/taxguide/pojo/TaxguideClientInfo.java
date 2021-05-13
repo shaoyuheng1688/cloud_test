@@ -6,8 +6,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.persistence.Transient;
-
 @ApiModel("导税客户端信息")
 @Data
 public class TaxguideClientInfo {
